@@ -1,11 +1,19 @@
 package com.masai.java;
 
-public abstract class Person {
+import java.io.Serializable;
+
+public abstract class Person implements Serializable{
+	
+	private static final long serialVersionUID = 2L;
 	
 	protected int id;
 	protected String aadhar;
 	protected String name;
 	protected String contact_no;
+	
+	public Person() {
+		
+	}
 	
 	public Person(int id, String aadhar, String name, String contact_no) {
 		this.id = id;
@@ -66,8 +74,21 @@ public abstract class Person {
 	
 	public static boolean isAadharValid(String aadhar)
 	{
-		//code
+		boolean flag = true;
+        if (aadhar.length() == 16) {
+            for (int i = 0; i < aadhar.length(); i++) {
+                if (!Character.isDigit(aadhar.charAt(i))) {
+                    flag = false;
+                    break;
+                }
+            }
+        } else {
+            flag = false;
+        }
+        return flag;
 	}
+	
+	
 	
 	/**
 	 * Valid name : contain only letters and white spaces
@@ -77,7 +98,17 @@ public abstract class Person {
 	
 	public static boolean isNameValid(String name)
 	{
-		// code
+		boolean flag = false;
+        for (int i = 0; i < name.length(); i++) {
+//            Name can contain white spaces
+            if (Character.isLetter(name.charAt(i)) | name.charAt(i) == ' ') {
+                flag = true;
+            } else {
+                flag = false;
+                break;
+            }
+        }
+        return flag;
 	}
 	
 	
@@ -87,9 +118,24 @@ public abstract class Person {
 	 * @return true if the contact is valid
 	 */
 	
-	public static boolean isContactValid(String name)
+	public static boolean isContactValid(String contact)
 	{
-		// code
+		boolean flag = true;
+        if (contact.length() == 12) {
+            if (contact.substring(0, 2).equals("91")) {
+                for (int i = 0; i < contact.length(); i++) {
+                    if (!Character.isDigit(contact.charAt(i))) {
+                        flag = false;
+                        break;
+                    }
+                }
+            } else {
+                flag = false;
+            }
+        } else {
+            flag = false;
+        }
+        return flag;
 	}
 	
 	
@@ -101,7 +147,21 @@ public abstract class Person {
 	
 	public static boolean isIDValid(int id)
 	{
-		// code
+		String ID = Integer.toString(id);
+		 boolean flag = true;
+	        for (int i = 0; i < ID.length(); i++) {
+	            if (!Character.isDigit(ID.charAt(i))) {
+	                flag = false;
+	                break;
+	            }
+	        }
+	        if (flag) {
+	            if (Integer.parseInt(ID) <= 0) {
+	                flag = false;
+	            }
+	        }
+	        return flag;
+	    
 	}
 	
 	
