@@ -7,7 +7,8 @@ public class RentRunner {
 	static ArrayList<Customer> customerList = new ArrayList<Customer>();
 
 	public static void main(String[] args) {
-		Customer ramu = new Customer(1,"Ramu","Y","Z",1);
+		Customer ramu = new Customer(2,"Shyam","hello","sasd",2);
+		
 		ramu.add();
 		ramu.print();
 	}
